@@ -76,6 +76,14 @@ def send_text_file(file_name):
     return app.send_static_file(file_dot_text)
 
 
+def assignPath(upload):
+    filename = secure_filename(upload.filename)
+    upload.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], filename
+    ))
+    return filename
+
+
 @app.after_request
 def add_header(response):
     """
